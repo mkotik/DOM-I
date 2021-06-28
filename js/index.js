@@ -46,6 +46,7 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute("src", siteContent["nav"]["img-src"]);
 // header items
+const nav = document.querySelector("nav");
 const navItems = document.querySelectorAll("a");
 
 // cta items
@@ -77,46 +78,89 @@ const contactEmail = contactItems[3];
 // Footer Items
 const copyright = document.querySelector("footer").children[0];
 
+// Stretch Items
+const makeButton = function () {
+  const button = document.createElement("button");
+  button.textContent = "Manipulate the DOM!";
+  button.style.textAlign = "center";
+  button.style.marginLeft = "42.55%";
+  button.style.marginRight = "42.55%";
+  button.style.marginTop = "2rem";
+  return button;
+};
+const masterButton = makeButton();
+const insertButton = (function () {
+  body = document.querySelector("body");
+  body.prepend(masterButton);
+})();
+masterButton.addEventListener("click", function () {
+  manipulateDom();
+  masterButton.style.display = "none";
+});
+
 // header DOM Manipulation
-const headerFunc = (function () {
-  navItems.forEach(function (cur, i) {
-    cur.textContent = siteContent.nav[`nav-item-${i}`];
-  });
-})();
+function manipulateDom() {
+  const headerFunc = (function () {
+    navItems.forEach(function (cur, i) {
+      cur.textContent = siteContent.nav[`nav-item-${i}`];
+      cur.style.color = "green";
+    });
+  })();
 
-// CTA DOM Manipulation
-const ctaFunc = (function () {
-  headerText.textContent = siteContent.cta.h1;
-  button.textContent = siteContent.cta.button;
-  ctaImage.setAttribute("src", siteContent.cta["img-src"]);
-})();
+  // CTA DOM Manipulation
+  const ctaFunc = (function () {
+    headerText.textContent = siteContent.cta.h1;
+    button.textContent = siteContent.cta.button;
+    ctaImage.setAttribute("src", siteContent.cta["img-src"]);
+  })();
 
-// Main Content DOM Manipulation
-const mainFunc = (function () {
-  const main = siteContent["main-content"];
-  midImage.setAttribute("src", siteContent["main-content"]["middle-img-src"]);
-  featuresTitle.textContent = main["features-h4"];
-  aboutTitle.textContent = main["about-h4"];
-  servicesTitle.textContent = main["services-h4"];
-  productTitle.textContent = main["product-h4"];
-  visionTitle.textContent = main["vision-h4"];
+  // Main Content DOM Manipulation
+  const mainFunc = (function () {
+    const main = siteContent["main-content"];
+    midImage.setAttribute("src", siteContent["main-content"]["middle-img-src"]);
+    featuresTitle.textContent = main["features-h4"];
+    aboutTitle.textContent = main["about-h4"];
+    servicesTitle.textContent = main["services-h4"];
+    productTitle.textContent = main["product-h4"];
+    visionTitle.textContent = main["vision-h4"];
 
-  featuresPar.textContent = main["features-content"];
-  aboutPar.textContent = main["about-content"];
-  servicesPar.textContent = main["services-content"];
-  productPar.textContent = main["product-content"];
-  visionPar.textContent = main["vision-content"];
-})();
+    featuresPar.textContent = main["features-content"];
+    aboutPar.textContent = main["about-content"];
+    servicesPar.textContent = main["services-content"];
+    productPar.textContent = main["product-content"];
+    visionPar.textContent = main["vision-content"];
+  })();
 
-// Contact DOM Manipulation
-const contactFunc = (function () {
-  const contact = siteContent.contact;
-  contactTitle.textContent = contact["contact-h4"];
-  contactAddress.textContent = contact.address;
-  contactNumber.textContent = contact.phone;
-  contactEmail.textContent = contact.email;
-})();
+  // Contact DOM Manipulation
+  const contactFunc = (function () {
+    const contact = siteContent.contact;
+    contactTitle.textContent = contact["contact-h4"];
+    contactAddress.textContent = contact.address;
+    contactNumber.textContent = contact.phone;
+    contactEmail.textContent = contact.email;
+  })();
 
-// Footer DOM Manipulation
-copyright.textContent = siteContent.footer.copyright;
-copyright.style.paddingBottom = "20px";
+  // Footer DOM Manipulation
+  const footerFunc = (function () {
+    copyright.textContent = siteContent.footer.copyright;
+    copyright.style.paddingBottom = "20px";
+  })();
+
+  // Adding new items to nav
+
+  const addNewNavItems = (function () {
+    const makeNewAnchor = function (anchor) {
+      const element = document.createElement("a");
+      element.textContent = anchor;
+      element.setAttribute("href", "#");
+      element.style.color = "green";
+      return element;
+    };
+
+    const contact = makeNewAnchor("Contact");
+    const team = makeNewAnchor("Team");
+
+    nav.appendChild(contact);
+    nav.appendChild(team);
+  })();
+}
