@@ -2,6 +2,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: linear-gradient(60deg, rgb(202, 250, 232), rgb(44, 44, 131));
 }
 
 .digit {
