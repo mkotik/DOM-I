@@ -45,15 +45,78 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute("src", siteContent["nav"]["img-src"]);
+// header items
 const navItems = document.querySelectorAll("a");
+
+// cta items
 const headerText = document.querySelector("h1");
 const button = document.querySelector("button");
 const ctaImage = document.getElementById("cta-img");
 
-navItems.forEach(function (cur, i) {
-  cur.textContent = siteContent.nav[`nav-item-${i}`];
-});
+// Main Content Items
+const midImage = document.querySelector(".middle-img");
+const textBoxes = document.querySelectorAll(".text-content");
+const featuresTitle = textBoxes[0].children[0];
+const featuresPar = textBoxes[0].children[1];
+const aboutTitle = textBoxes[1].children[0];
+const aboutPar = textBoxes[1].children[1];
+const servicesTitle = textBoxes[2].children[0];
+const servicesPar = textBoxes[2].children[1];
+const productTitle = textBoxes[3].children[0];
+const productPar = textBoxes[3].children[1];
+const visionTitle = textBoxes[4].children[0];
+const visionPar = textBoxes[4].children[1];
 
-headerText.textContent = siteContent.cta.h1;
-button.textContent = siteContent.cta.button;
-ctaImage.setAttribute("src", siteContent.cta["img-src"]);
+// Contact Items
+const contactItems = document.querySelector(".contact").children;
+const contactTitle = contactItems[0];
+const contactAddress = contactItems[1];
+const contactNumber = contactItems[2];
+const contactEmail = contactItems[3];
+
+// Footer Items
+const copyright = document.querySelector("footer").children[0];
+
+// header DOM Manipulation
+const headerFunc = (function () {
+  navItems.forEach(function (cur, i) {
+    cur.textContent = siteContent.nav[`nav-item-${i}`];
+  });
+})();
+
+// CTA DOM Manipulation
+const ctaFunc = (function () {
+  headerText.textContent = siteContent.cta.h1;
+  button.textContent = siteContent.cta.button;
+  ctaImage.setAttribute("src", siteContent.cta["img-src"]);
+})();
+
+// Main Content DOM Manipulation
+const mainFunc = (function () {
+  const main = siteContent["main-content"];
+  midImage.setAttribute("src", siteContent["main-content"]["middle-img-src"]);
+  featuresTitle.textContent = main["features-h4"];
+  aboutTitle.textContent = main["about-h4"];
+  servicesTitle.textContent = main["services-h4"];
+  productTitle.textContent = main["product-h4"];
+  visionTitle.textContent = main["vision-h4"];
+
+  featuresPar.textContent = main["features-content"];
+  aboutPar.textContent = main["about-content"];
+  servicesPar.textContent = main["services-content"];
+  productPar.textContent = main["product-content"];
+  visionPar.textContent = main["vision-content"];
+})();
+
+// Contact DOM Manipulation
+const contactFunc = (function () {
+  const contact = siteContent.contact;
+  contactTitle.textContent = contact["contact-h4"];
+  contactAddress.textContent = contact.address;
+  contactNumber.textContent = contact.phone;
+  contactEmail.textContent = contact.email;
+})();
+
+// Footer DOM Manipulation
+copyright.textContent = siteContent.footer.copyright;
+copyright.style.paddingBottom = "20px";
